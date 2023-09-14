@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
 
@@ -8,9 +8,22 @@ interface Item {
   checked: boolean;
 }
 
+type Condition = 'all' | 'active' | 'completed';
+
 function App() {
   const [todoList, setTodoList] = useState<Item[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [condition, setCondition] = useState<Condition>('all');
+
+  const filteredList = useMemo(() => {
+    if (condition === 'all') {
+      return todoList;
+    } else if (condition === 'active') {
+      return todoList.filter((todo) => !todo.checked);
+    } else {
+      return todoList.filter((todo) => todo.checked);
+    }
+  }, [todoList, condition]);
 
   const toggleItemCheck = (value: boolean, id: string) => {
     const nextTodoList = todoList.map((todo) => {
@@ -64,10 +77,10 @@ function App() {
           onChange={(e) => setInputValue(e.target.value)}
           onKeyUp={(e) => handleAddItem(e)}
         />
-        {todoList.length > 0 && (
+        {filteredList.length > 0 && (
           <div className="mt-[16px] rounded-[5px] bg-white drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)]">
-            <div>
-              {todoList.map(({ id, value, checked }) => (
+            <div className="max-h-[600px] overflow-y-auto">
+              {filteredList.map(({ id, value, checked }) => (
                 <div
                   key={id}
                   className="border-b-[1px] border-solid border-[e3e4f1]"
@@ -84,11 +97,31 @@ function App() {
               ))}
             </div>
             <div className="px-[24px] py-[20px] flex justify-between">
-              <span>{todoList.length} items left</span>
+              <span>{filteredList.length} items left</span>
               <button onClick={() => clearCompleted()}>Clear Completed</button>
             </div>
           </div>
         )}
+        <div className="flex items-center py-[16px] bg-white rounded-[5px] drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)] mt-[16px] justify-center gap-[18px] text-[color:#9495a5] text-[length:14px] font-bold">
+          <button
+            className={`${condition === 'all' && 'text-[color:#3a7cfd]'}`}
+            onClick={() => setCondition('all')}
+          >
+            All
+          </button>
+          <button
+            className={`${condition === 'active' && 'text-[color:#3a7cfd]'}`}
+            onClick={() => setCondition('active')}
+          >
+            Active
+          </button>
+          <button
+            className={`${condition === 'completed' && 'text-[color:#3a7cfd]'}`}
+            onClick={() => setCondition('completed')}
+          >
+            Completed
+          </button>
+        </div>
       </div>
     </main>
   );
