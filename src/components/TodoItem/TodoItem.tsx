@@ -18,16 +18,16 @@ function TodoItem({
   removeItem,
 }: TodoItemProps) {
   return (
-    <div className="px-[24px] py-[20px] flex justify-between gap-[12px] items-center">
+    <div className='flex items-center justify-between gap-[12px] px-[24px] py-[20px]'>
       <Checkbox.Root
-        className={`w-[20px] h-[20px] flex justify-center items-center rounded-full text-white border-[#e3e4f1] border-solid border-[1px] ${
-          checked && 'bg-gradient-to-r from-[#55DDFF] to-[#C058F3] border-0'
+        className={`flex h-[20px] w-[20px] items-center justify-center rounded-full border-[1px] border-solid border-[#e3e4f1] text-white ${
+          checked && 'border-0 bg-gradient-to-r from-[#55DDFF] to-[#C058F3]'
         }`}
         id={id}
         checked={checked}
         onCheckedChange={onChange}
       >
-        <Checkbox.Indicator className="w-full h-full flex justify-center items-center">
+        <Checkbox.Indicator className='flex h-full w-full items-center justify-center'>
           <CheckIcon size={12} />
         </Checkbox.Indicator>
       </Checkbox.Root>

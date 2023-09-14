@@ -64,26 +64,26 @@ function App() {
   };
 
   return (
-    <main className="px-[24px] py-[48px] w-[100vw] max-w-[450px]">
+    <main className='w-[100vw] max-w-[450px] px-[24px] py-[48px]'>
       <header>
-        <p className="tracking-[8px] text-[length:24px]">TODO</p>
+        <p className='text-[length:24px] tracking-[8px]'>TODO</p>
       </header>
-      <div className="mt-[25px]">
+      <div className='mt-[25px]'>
         <input
-          className="bg-white rounded-[5px] w-full h-[48px] pl-[20px]"
-          type="text"
-          placeholder="Create a new todo..."
+          className='h-[48px] w-full rounded-[5px] bg-white pl-[20px]'
+          type='text'
+          placeholder='Create a new todo...'
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyUp={(e) => handleAddItem(e)}
         />
         {filteredList.length > 0 && (
-          <div className="mt-[16px] rounded-[5px] bg-white drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)]">
-            <div className="max-h-[600px] overflow-y-auto">
+          <div className='mt-[16px] rounded-[5px] bg-white drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)]'>
+            <div className='max-h-[600px] overflow-y-auto'>
               {filteredList.map(({ id, value, checked }) => (
                 <div
                   key={id}
-                  className="border-b-[1px] border-solid border-[e3e4f1]"
+                  className='border-b-[1px] border-solid border-[e3e4f1]'
                 >
                   <TodoItem
                     id={id}
@@ -96,13 +96,13 @@ function App() {
                 </div>
               ))}
             </div>
-            <div className="px-[24px] py-[20px] flex justify-between">
+            <div className='flex justify-between px-[24px] py-[20px]'>
               <span>{filteredList.length} items left</span>
               <button onClick={() => clearCompleted()}>Clear Completed</button>
             </div>
           </div>
         )}
-        <div className="flex items-center py-[16px] bg-white rounded-[5px] drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)] mt-[16px] justify-center gap-[18px] text-[color:#9495a5] text-[length:14px] font-bold">
+        <div className='mt-[16px] flex items-center justify-center gap-[18px] rounded-[5px] bg-white py-[16px] text-[length:14px] font-bold text-[color:#9495a5] drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)]'>
           <button
             className={`${condition === 'all' && 'text-[color:#3a7cfd]'}`}
             onClick={() => setCondition('all')}
