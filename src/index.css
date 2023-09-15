@@ -27,9 +27,6 @@
 
 body {
   line-height: 1.5;
-  background-image: url(./assets/hero.svg);
-  background-repeat: no-repeat;
-  background-size: auto 200px;
   background-color: #fafafa;
 }
 

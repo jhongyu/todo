@@ -18,7 +18,7 @@ function TodoItem({
   removeItem,
 }: TodoItemProps) {
   return (
-    <div className='flex items-center justify-between gap-3 px-6 py-4'>
+    <div className='flex items-center justify-between gap-3 px-6 py-4 md:gap-6 md:py-5'>
       <Checkbox.Root
         className={`flex h-5 w-5 items-center justify-center rounded-full border border-solid border-gray-200 text-white ${
           checked && 'border-0 bg-gradient-to-r from-[#55DDFF] to-[#C058F3]'
@@ -40,7 +40,7 @@ function TodoItem({
         {children}
       </label>
       <button onClick={() => removeItem(id)}>
-        <ClearIcon size={16} />
+        <ClearIcon size={20} />
       </button>
     </div>
   );
