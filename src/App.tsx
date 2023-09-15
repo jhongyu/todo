@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import './App.css';
+import Card from './components/Card';
 import TodoItem from './components/TodoItem';
 
 interface Item {
@@ -64,26 +65,28 @@ function App() {
   };
 
   return (
-    <main className='w-[100vw] max-w-[450px] px-[24px] py-[48px]'>
+    <main className='w-[100vw] max-w-[540px] px-6 py-12'>
       <header>
-        <p className='text-[length:24px] tracking-[8px]'>TODO</p>
+        <p className='text-2xl tracking-[8px] text-white md:text-4xl'>TODO</p>
       </header>
-      <div className='mt-[25px]'>
-        <input
-          className='h-[48px] w-full rounded-[5px] bg-white pl-[20px]'
-          type='text'
-          placeholder='Create a new todo...'
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyUp={(e) => handleAddItem(e)}
-        />
+      <div className='mt-6'>
+        <Card>
+          <input
+            className='h-12 w-full rounded pl-5 text-base md:text-lg'
+            type='text'
+            placeholder='Create a new todo...'
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyUp={(e) => handleAddItem(e)}
+          />
+        </Card>
         {filteredList.length > 0 && (
-          <div className='mt-[16px] rounded-[5px] bg-white drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)]'>
-            <div className='max-h-[600px] overflow-y-auto'>
+          <Card className='mt-4'>
+            <div className='max-h-[600px] overflow-y-auto text-base md:text-lg'>
               {filteredList.map(({ id, value, checked }) => (
                 <div
                   key={id}
-                  className='border-b-[1px] border-solid border-[e3e4f1]'
+                  className='border-b border-solid border-b-gray-200'
                 >
                   <TodoItem
                     id={id}
@@ -96,32 +99,48 @@ function App() {
                 </div>
               ))}
             </div>
-            <div className='flex justify-between px-[24px] py-[20px]'>
+            <div className='flex justify-between px-6 py-4 text-sm text-slate-400 md:text-base'>
               <span>{filteredList.length} items left</span>
-              <button onClick={() => clearCompleted()}>Clear Completed</button>
+              <button
+                onClick={() => clearCompleted()}
+                className='hover:text-slate-600'
+              >
+                Clear Completed
+              </button>
             </div>
-          </div>
+          </Card>
         )}
-        <div className='mt-[16px] flex items-center justify-center gap-[18px] rounded-[5px] bg-white py-[16px] text-[length:14px] font-bold text-[color:#9495a5] drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)]'>
+        <Card className='mt-4 flex items-center justify-center gap-5 py-4 text-base font-bold text-slate-400'>
           <button
-            className={`${condition === 'all' && 'text-[color:#3a7cfd]'}`}
+            className={`${
+              condition === 'all' ? 'text-blue-500' : 'hover:text-slate-600'
+            }`}
+            type='button'
             onClick={() => setCondition('all')}
           >
             All
           </button>
           <button
-            className={`${condition === 'active' && 'text-[color:#3a7cfd]'}`}
+            className={`${
+              condition === 'active' ? 'text-blue-500' : 'hover:text-slate-600'
+            }`}
+            type='button'
             onClick={() => setCondition('active')}
           >
             Active
           </button>
           <button
-            className={`${condition === 'completed' && 'text-[color:#3a7cfd]'}`}
+            className={`${
+              condition === 'completed'
+                ? 'text-blue-500'
+                : 'hover:text-slate-600'
+            }`}
+            type='button'
             onClick={() => setCondition('completed')}
           >
             Completed
           </button>
-        </div>
+        </Card>
       </div>
     </main>
   );

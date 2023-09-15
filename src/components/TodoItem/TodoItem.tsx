@@ -18,9 +18,9 @@ function TodoItem({
   removeItem,
 }: TodoItemProps) {
   return (
-    <div className='flex items-center justify-between gap-[12px] px-[24px] py-[20px]'>
+    <div className='flex items-center justify-between gap-3 px-6 py-4'>
       <Checkbox.Root
-        className={`flex h-[20px] w-[20px] items-center justify-center rounded-full border-[1px] border-solid border-[#e3e4f1] text-white ${
+        className={`flex h-5 w-5 items-center justify-center rounded-full border border-solid border-gray-200 text-white ${
           checked && 'border-0 bg-gradient-to-r from-[#55DDFF] to-[#C058F3]'
         }`}
         id={id}
@@ -33,7 +33,7 @@ function TodoItem({
       </Checkbox.Root>
       <label
         className={`flex-1 cursor-pointer ${
-          checked && 'text-[color:#d1d2da] line-through'
+          checked && 'text-gray-500 line-through'
         }`}
         htmlFor={id}
       >
