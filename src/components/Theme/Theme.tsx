@@ -1,8 +1,9 @@
-import useTheme from '@/hooks/useTheme';
+import { ThemeContext } from '@/ThemeProvider';
+import { useContext } from 'react';
 import { FiMoon as MoonIcon, FiSun as SunIcon } from 'react-icons/fi';
 
 const Theme = () => {
-  const { isDark, setTheme } = useTheme();
+  const { isDark, setTheme } = useContext(ThemeContext);
 
   return (
     <>
