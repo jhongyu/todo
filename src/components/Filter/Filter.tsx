@@ -11,7 +11,9 @@ function Filter({ condition, setCondition }: FilterProps) {
     <div className='flex gap-4'>
       <button
         className={`${
-          condition === 'all' ? 'text-blue-500' : 'hover:text-slate-600'
+          condition === 'all'
+            ? 'text-[color:--primary]'
+            : 'hover:text-[color:--text1]'
         }`}
         type='button'
         onClick={() => setCondition('all')}
@@ -20,7 +22,9 @@ function Filter({ condition, setCondition }: FilterProps) {
       </button>
       <button
         className={`${
-          condition === 'active' ? 'text-blue-500' : 'hover:text-slate-600'
+          condition === 'active'
+            ? 'text-[color:--primary]'
+            : 'hover:text-[color:--text1]'
         }`}
         type='button'
         onClick={() => setCondition('active')}
@@ -29,7 +33,9 @@ function Filter({ condition, setCondition }: FilterProps) {
       </button>
       <button
         className={`${
-          condition === 'completed' ? 'text-blue-500' : 'hover:text-slate-600'
+          condition === 'completed'
+            ? 'text-[color:--primary]'
+            : 'hover:text-[color:--text1]'
         }`}
         type='button'
         onClick={() => setCondition('completed')}

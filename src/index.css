@@ -15,6 +15,28 @@
   -webkit-text-size-adjust: 100%;
 }
 
+:root,
+:root.light {
+  --page-background: hsl(0, 0%, 98%);
+  --content-background: hsl(0, 100%, 100%);
+  --primary: hsl(220, 98%, 61%);
+  --text1: hsl(235, 19%, 35%);
+  --text2: hsl(236, 9%, 61%);
+  --text3: hsl(233, 11%, 84%);
+  --border: hsl(236, 33%, 92%);
+  --drop-shadow: '0_35px_50px_rgba(194,195,214,0.5)';
+}
+
+:root.dark {
+  --page-background: hsl(235, 21%, 11%);
+  --content-background: hsl(235, 24%, 19%);
+  --text1: hsl(234, 39%, 85%);
+  --text2: hsl(235, 16%, 43%);
+  --text3: hsl(233, 14%, 35%);
+  --border: hsl(237, 14%, 26%);
+  --drop-shadow: '0_35px_50px_rgba(0,0,0,0.5)';
+}
+
 *,
 *::before,
 *::after {
@@ -27,7 +49,7 @@
 
 body {
   line-height: 1.5;
-  background-color: #fafafa;
+  background-color: var(--page-background);
 }
 
 input,

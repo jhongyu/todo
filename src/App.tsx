@@ -1,7 +1,7 @@
-import heroMobileImg from '@/assets/hero-mobile.png';
-import heroImg from '@/assets/hero.png';
 import Card from '@/components/Card';
 import Filter from '@/components/Filter';
+import HeroImage from '@/components/HeroImage';
+import Theme from '@/components/Theme';
 import TodoItem from '@/components/TodoItem';
 import useWindowSize from '@/hooks/useWindowSize';
 import React, { useMemo, useState } from 'react';
@@ -22,7 +22,6 @@ function App() {
 
   const { width } = useWindowSize();
   const isMobile = width < 768;
-  const imgSrc = isMobile ? heroMobileImg : heroImg;
 
   const filteredList = useMemo(() => {
     if (condition === 'all') {
@@ -74,21 +73,16 @@ function App() {
 
   return (
     <div className='wrapper'>
-      <section className='hero'>
-        <img
-          className='h-full w-full object-fill'
-          src={imgSrc}
-          alt='hero picture'
-        />
-      </section>
+      <HeroImage />
       <main className='main w-[100vw] max-w-2xl px-6 py-12 md:py-16'>
-        <header>
-          <p className='text-2xl tracking-[8px] text-white md:text-4xl'>TODO</p>
+        <header className='flex justify-between text-white'>
+          <p className='text-2xl tracking-[8px] md:text-4xl'>TODO</p>
+          <Theme />
         </header>
         <div className='mt-6 md:mt-10'>
           <Card>
             <input
-              className='h-12 w-full rounded pl-5 text-base md:h-16 md:text-lg'
+              className='h-12 w-full rounded bg-[--content-background] pl-5 text-base text-[color:--text1] md:h-16 md:text-lg'
               type='text'
               placeholder='Create a new todo...'
               value={inputValue}
@@ -97,12 +91,12 @@ function App() {
             />
           </Card>
           <Card className='mt-4 md:mt-6'>
-            <div className='max-h-[600px] overflow-y-auto text-base md:text-lg'>
+            <div className='max-h-[600px] overflow-y-auto text-base text-[color:--text1] md:text-lg'>
               {filteredList.length > 0 ? (
                 filteredList.map(({ id, value, checked }) => (
                   <div
                     key={id}
-                    className='border-b border-solid border-b-gray-200'
+                    className='border-b border-solid border-b-[color:--border]'
                   >
                     <TodoItem
                       id={id}
@@ -115,26 +109,26 @@ function App() {
                   </div>
                 ))
               ) : (
-                <p className='border-b border-solid border-b-gray-200 px-6 py-4 md:py-5'>
+                <p className='border-b border-solid border-b-[color:--border] px-6 py-4 md:py-5'>
                   There is no item
                 </p>
               )}
             </div>
-            <div className='flex justify-between px-6 py-4 text-sm text-slate-400 md:text-base'>
+            <div className='flex justify-between px-6 py-4 text-sm text-[color:--text2] md:text-base'>
               <span>{filteredList.length} items left</span>
               {!isMobile && (
                 <Filter condition={condition} setCondition={setCondition} />
               )}
               <button
                 onClick={() => clearCompleted()}
-                className='hover:text-slate-600'
+                className='hover:text-[color:--text1]'
               >
                 Clear Completed
               </button>
             </div>
           </Card>
           {isMobile && (
-            <Card className='mt-4 flex items-center justify-center gap-5 py-4 text-base font-bold text-slate-400'>
+            <Card className='mt-4 flex items-center justify-center gap-5 py-4 text-base font-bold text-[color:--text2]'>
               <Filter condition={condition} setCondition={setCondition} />
             </Card>
           )}

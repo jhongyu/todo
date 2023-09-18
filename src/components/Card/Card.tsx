@@ -9,7 +9,7 @@ function Card({
 }) {
   return (
     <div
-      className={`rounded bg-white drop-shadow-[0_35px_50px_rgba(194,195,214,0.5)] ${className}`}
+      className={`rounded bg-[--content-background] drop-shadow-[--drop-shadow] ${className}`}
     >
       {children}
     </div>

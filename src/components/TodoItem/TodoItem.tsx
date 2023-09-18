@@ -20,7 +20,7 @@ function TodoItem({
   return (
     <div className='flex items-center justify-between gap-3 px-6 py-4 md:gap-6 md:py-5'>
       <Checkbox.Root
-        className={`flex h-5 w-5 items-center justify-center rounded-full border border-solid border-gray-200 text-white ${
+        className={`flex h-5 w-5 items-center justify-center rounded-full border border-solid border-[color:--border] text-white ${
           checked && 'border-0 bg-gradient-to-r from-[#55DDFF] to-[#C058F3]'
         }`}
         id={id}
@@ -33,7 +33,7 @@ function TodoItem({
       </Checkbox.Root>
       <label
         className={`flex-1 cursor-pointer ${
-          checked && 'text-gray-500 line-through'
+          checked && 'text-[color:--text3] line-through'
         }`}
         htmlFor={id}
       >
