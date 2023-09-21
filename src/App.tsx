@@ -2,12 +2,13 @@ import Card from '@/components/Card';
 import Filter from '@/components/Filter';
 import HeroImage from '@/components/HeroImage';
 import Theme from '@/components/Theme';
-import TodoItem from '@/components/TodoItem';
+import TodoList from '@/components/TodoList';
 import useWindowSize from '@/hooks/useWindowSize';
+import { OnDragEndResponder } from '@hello-pangea/dnd';
 import React, { useMemo, useState } from 'react';
 import './App.css';
 
-interface Item {
+export interface Item {
   id: string;
   value: string;
   checked: boolean;
@@ -33,24 +34,6 @@ function App() {
     }
   }, [todoList, condition]);
 
-  const toggleItemCheck = (value: boolean, id: string) => {
-    const nextTodoList = todoList.map((todo) => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          checked: value,
-        };
-      }
-      return todo;
-    });
-    setTodoList(nextTodoList);
-  };
-
-  const handleRemoveItem = (id: string) => {
-    const nextTodoList = todoList.filter((todo) => !(todo.id === id));
-    setTodoList(nextTodoList);
-  };
-
   const handleAddItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const nextTodoList = [
@@ -68,6 +51,18 @@ function App() {
 
   const clearCompleted = () => {
     const nextTodoList = todoList.filter((todo) => !todo.checked);
+    setTodoList(nextTodoList);
+  };
+
+  const handleDragEnd: OnDragEndResponder = ({ destination, source }) => {
+    if (!destination) {
+      return;
+    }
+
+    const nextTodoList = [...todoList];
+    const [removed] = nextTodoList.splice(source.index, 1);
+    nextTodoList.splice(destination.index, 0, removed);
+
     setTodoList(nextTodoList);
   };
 
@@ -91,28 +86,12 @@ function App() {
             />
           </Card>
           <Card className='mt-4 md:mt-6'>
-            <div className='max-h-[600px] overflow-y-auto text-base text-[color:--text1] md:text-lg'>
-              {filteredList.length > 0 ? (
-                filteredList.map(({ id, value, checked }) => (
-                  <div
-                    key={id}
-                    className='border-b border-solid border-b-[color:--border]'
-                  >
-                    <TodoItem
-                      id={id}
-                      checked={checked}
-                      onChange={(value) => toggleItemCheck(value, id)}
-                      removeItem={(id) => handleRemoveItem(id)}
-                    >
-                      {value}
-                    </TodoItem>
-                  </div>
-                ))
-              ) : (
-                <p className='border-b border-solid border-b-[color:--border] px-6 py-4 md:py-5'>
-                  There is no item
-                </p>
-              )}
+            <div className='max-h-[560px] overflow-y-auto text-base text-[color:--text1] md:text-lg'>
+              <TodoList
+                list={filteredList}
+                setTodoList={setTodoList}
+                handleDragEnd={handleDragEnd}
+              />
             </div>
             <div className='flex justify-between px-6 py-4 text-sm text-[color:--text2] md:text-base'>
               <span>{filteredList.length} items left</span>
@@ -133,6 +112,9 @@ function App() {
             </Card>
           )}
         </div>
+        <p className='mt-8 text-center text-sm text-[color:--text2] md:text-base'>
+          Drag and drop to reorder list
+        </p>
       </main>
     </div>
   );
