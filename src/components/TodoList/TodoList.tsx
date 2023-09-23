@@ -50,7 +50,7 @@ function TodoList({ list, setTodoList, handleDragEnd }: TodoListProps) {
                 {(provided, snapshot) => (
                   <div
                     className={`border-b border-solid border-b-[color:--border] ${
-                      snapshot.isDragging && 'bg-[color:--primary]'
+                      snapshot.isDragging && 'bg-[color:--secondary]'
                     }`}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
